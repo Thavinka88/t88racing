@@ -149,7 +149,7 @@ const stats = [
   ["Points", SITE.standings[SITE.me - 1]],
   ["Rounds", done.length + " / " + SITE.totalRounds],
   ["Best finish", "P" + Math.min(...done.map(r => r.finalFinish))],
-  ["Avg final", (sum(done.map(r => r.finalFinish)) / done.length).toFixed(1)],
+  ["Avg finish", (sum(done.map(r => r.finalFinish)) / done.length).toFixed(1)],
   ["Podiums", done.filter(r => r.finalFinish <= 3).length],
   ["Poles", done.filter(r => r.quali === 1).length],
   ["Heat wins", done.filter(r => r.heatFinish === 1).length],
