@@ -78,6 +78,13 @@ td::before{content:attr(data-label);color:var(--muted);font-size:12px;text-trans
 #lb button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:0;width:44px;height:44px;border-radius:50%;font-size:22px;cursor:pointer}
 #lbp{left:12px}#lbn{right:12px}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:10px}
+.card ul{margin:8px 0 0;padding-left:18px}.card li{font-size:14px;color:var(--muted);margin:3px 0}.card small{display:block;color:var(--muted);font-size:12px;margin:2px 0 4px}
+#totop{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--text);font-size:20px;text-decoration:none;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;z-index:6}
+#totop.show{opacity:1;pointer-events:auto}
+#cta{display:none}
+@media(max-width:640px){#cta{display:block;position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(10,15,26,.96);border-top:1px solid var(--line);z-index:5;transform:translateY(110%);transition:transform .25s}
+#cta.show{transform:none}#cta .btn{display:flex;justify-content:center;margin:0;width:100%}#totop{bottom:calc(78px + env(safe-area-inset-bottom,0px))}footer{padding-bottom:90px}}
 .future .card{border-style:dashed;background:transparent}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}.card b{display:block;font-family:var(--head);font-style:italic;font-size:24px;color:var(--hi)}
 .cta{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;max-width:680px;margin-bottom:16px}
@@ -101,10 +108,12 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px;border-top:1px soli
   <section id="about" class="reveal about" hidden><h2>About me</h2><div id="aboutText"></div></section>
   <section id="videoSec" class="reveal" hidden><h2>Featured video</h2><div class="vid" id="vid"></div></section>
   <section id="gallery" class="reveal"><h2>Gallery</h2><div class="gallery" id="photos"></div><p class="note" id="credit"></p></section>
-  <section id="partners" class="reveal"><h2>Partner with me</h2><p class="lbl">What I can offer today</p><div class="grid2" id="benefits"></div><p class="lbl">As support grows</p><div class="grid2 future" id="future"></div><p class="lbl">My audience</p><div class="grid2" id="audience"></div><p class="note" id="audNote"></p><div id="sponsors"></div><div id="kit"></div></section>
+  <section id="partners" class="reveal"><h2>Partner with me</h2><p class="lbl">What I can offer today</p><div class="grid2" id="benefits"></div><p class="lbl">As support grows</p><div class="grid2 future" id="future"></div><p class="lbl">Sponsorship tiers</p><div class="grid3" id="tiers"></div><p class="note" style="margin:0 0 18px">Tiers are starting points, not fixed packages, and I’m happy to build a custom package. Contact me to discuss pricing and a package that suits your brand.</p><p class="lbl">Where the support goes</p><div class="grid2" id="invest"></div><p class="lbl">My audience</p><div class="grid2" id="audience"></div><p class="note" id="audNote"></p><div id="sponsors"></div><div id="kit"></div></section>
   <section id="contact" class="reveal"><h2>Get in touch</h2><p id="bio"></p><div id="links"></div></section>
 </main>
 <div id="lb"><button id="lbp" aria-label="Previous">‹</button><img alt=""><button id="lbn" aria-label="Next">›</button><div id="lbc"></div></div>
+<a id="totop" href="#" aria-label="Back to top">↑</a>
+<div id="cta"><a class="btn" href="#contact">Partner with me</a></div>
 <footer><div class="wrap" id="foot"></div></footer>
 
 <script>
@@ -141,6 +150,17 @@ const SITE = {
   ],
   sponsors: [],         // e.g. ["Brand A","Brand B"]. Empty = “become the first partner” message
 
+  tiers: [
+    {name:"Title Partner", tag:"Highest visibility", items:["Primary logo placement on helmet (visor strip or crown, the largest and most visible spot)","Branded t-shirt/cap worn at every race and training session","Named as “Racing with the support of [Brand]” in every social post and race recap","Dedicated post introducing the partnership, plus a season-end recap crediting them","One brand appearance or meet-and-greet per season"]},
+    {name:"Performance Partner", tag:"Strong visibility", items:["Secondary logo placement on helmet (side or back panel)","Logo on branded t-shirt worn on race day","Named mention in race recap posts each round"]},
+    {name:"Supporting Partner", tag:"Flexible support", items:["Small logo placement on helmet or cap","End-of-season shoutout and thank-you post","Ideal for covering a specific cost directly: one race weekend’s rental fees, a coaching session, or fuel for a round"]}
+  ],
+  invest: [
+    {title:"Practice track time", text:"More sessions at Speedbay to turn pace into results."},
+    {title:"Entry fees", text:"Per-race entry fees for every round of the season."},
+    {title:"Racing equipment", text:"A race suit and other racing gear to carry partner branding."},
+    {title:"Recording equipment", text:"An action camera such as a GoPro or DJI Osmo Action 5."}
+  ],
   totalRounds: 6,
   // Fill in the next round when it is done (done:true). Positions are numbers.
   rounds: [
@@ -149,7 +169,7 @@ const SITE = {
     {round:"R3", date:"26 Jun 2026", venue:"Speedbay Portcity", done:true, quali:10, heatStart:10, heatFinish:7, finalStart:7, finalFinish:6, points:10},
     {round:"R4", date:"21 Aug 2026", venue:"Speedbay Portcity", done:true, quali:6, heatStart:6, heatFinish:5, finalStart:9, finalFinish:6, points:10},
     {round:"R5", date:"2 Oct 2026", venue:"Speedbay Portcity", done:true, quali:9, heatStart:9, heatFinish:6, finalStart:6, finalFinish:4, points:14},
-    {round:"R6", date:"4 Dec 2026", venue:"Speedbay Portcity", done:false}
+    {round:"R6", date:"4 Dec 2026", iso:"2026-12-04", tentative:true, venue:"Speedbay Portcity", done:false}   // for an upcoming round: iso = date as YYYY-MM-DD (for the countdown), tentative:true while the date is unconfirmed
   ],
   poleBonus: 1,
   standings: [92,72,69,52,44,36,30,28,28,25,25,19,18,16,12,8,6,2],
@@ -188,7 +208,8 @@ document.title = SITE.name + " – Racing Portfolio";
 $("navName").textContent = SITE.name; $("name").textContent = SITE.name;
 $("num").textContent = "P" + SITE.me; $("tagline").textContent = SITE.tagline;
 $("bio").textContent = SITE.bio; $("statsTitle").textContent = SITE.championship + " · " + SITE.className;
-$("foot").textContent = "© " + new Date().getFullYear() + " " + SITE.name;
+const last = done[done.length - 1];
+$("foot").textContent = "© " + new Date().getFullYear() + " " + SITE.name + (last ? " · Updated after " + last.round + " (" + last.date + ")" : "");
 $("credit").textContent = SITE.photoCredit;
 if (SITE.hero) { const hd = document.querySelector(".hero"); hd.classList.add("img"); hd.style.setProperty("--hero", 'url("' + SITE.hero + '")'); }
 
@@ -196,7 +217,8 @@ const ig = SITE.links.find(l => /instagram/i.test(l.label));
 $("heroBtns").innerHTML = '<a class="btn" href="#contact">Partner with me</a>' + (ig ? `<a class="btn alt" href="${esc(ig.url)}" target="_blank" rel="noopener">${icon("instagram")}Follow my season</a>` : "");
 
 const nx = SITE.rounds.find(r => !r.done);
-if (nx) $("next").innerHTML = `<div class="next"><div><span>Next race</span><b>${esc(nx.round)} · ${esc(nx.date)}</b><span>${esc(nx.venue)}</span></div><div><b>${lead - mine} pts</b><span>behind the championship leader</span></div></div>`;
+let when = ""; if (nx) { const dd = Math.ceil((new Date(nx.iso || nx.date) - new Date()) / 86400000); if (!isNaN(dd)) when = dd > 0 ? " · " + dd + " day" + (dd === 1 ? "" : "s") + " to go" : dd === 0 ? " · Race day" : ""; }
+if (nx) $("next").innerHTML = `<div class="next"><div><span>Next race</span><b>${esc(nx.round)} · ${esc(nx.date)}${nx.tentative ? " (tentative)" : ""}</b><span>${esc(nx.venue)}${when}</span></div><div><b>${lead - mine} pts</b><span>behind the championship leader</span></div></div>`;
 
 const gain = sum(done.map(r => (r.heatStart - r.heatFinish) + (r.finalStart - r.finalFinish)));
 const stats = [
@@ -209,7 +231,7 @@ $("stats").innerHTML = stats.map(([l, v], i) => `<div class="stat${i < 3 ? " key
 
 const delta = (s, f) => { const d = s - f; return d > 0 ? `<span class="up">▲${d}</span>` : d < 0 ? `<span class="dn">▼${-d}</span>` : '<span class="dim">–</span>'; };
 $("rows").innerHTML = SITE.rounds.map(r => {
-  if (!r.done) return `<tr><td data-label="Round">${esc(r.round)}</td><td data-label="Date">${esc(r.date)}</td><td data-label="Venue">${esc(r.venue)}</td><td colspan="5" class="dim">Upcoming</td></tr>`;
+  if (!r.done) return `<tr><td data-label="Round">${esc(r.round)}</td><td data-label="Date">${esc(r.date)}${r.tentative ? " (tentative)" : ""}</td><td data-label="Venue">${esc(r.venue)}</td><td colspan="5" class="dim">Upcoming</td></tr>`;
   const b = (r.quali === 1 ? '<span class="badge">Pole</span>' : "") + (r.heatFinish === 1 ? '<span class="badge">Heat win</span>' : "") + (r.finalFinish <= 3 ? '<span class="badge">Podium</span>' : "");
   return `<tr><td data-label="Round">${esc(r.round)}</td><td data-label="Date">${esc(r.date)}</td><td data-label="Venue">${esc(r.venue)}</td><td data-label="Quali">P${r.quali}</td>
   <td data-label="Heat">P${r.heatStart} → P${r.heatFinish}${delta(r.heatStart, r.heatFinish)}</td>
@@ -235,6 +257,8 @@ if (vid) { $("videoSec").hidden = false; $("vid").innerHTML = `<iframe src="http
 
 $("photos").innerHTML = SITE.photos.map(p => `<figure class="ph">${p.src ? `<img src="${esc(p.src)}" alt="${esc(p.caption)}" loading="lazy">` : ""}<span>${esc(p.caption)}</span></figure>`).join("");
 $("benefits").innerHTML = SITE.benefits.map(b => `<div class="card"><b>${esc(b.title)}</b>${esc(b.text)}</div>`).join("");
+$("tiers").innerHTML = SITE.tiers.map(x => `<div class="card"><b>${esc(x.name)}</b><small>${esc(x.tag)}</small><ul>${x.items.map(i => "<li>" + esc(i) + "</li>").join("")}</ul></div>`).join("");
+$("invest").innerHTML = SITE.invest.map(x => `<div class="card"><b>${esc(x.title)}</b>${esc(x.text)}</div>`).join("");
 $("future").innerHTML = SITE.future.map(b => `<div class="card"><b>${esc(b.title)}</b>${esc(b.text)}</div>`).join("");
 $("audNote").textContent = SITE.audienceNote;
 $("audience").innerHTML = SITE.audience.filter(a => a.value).map(a => `<div class="card"><b>${esc(a.value)}</b>${esc(a.label)}</div>`).join("");
@@ -254,6 +278,12 @@ lb.onclick = () => lb.style.display = "none";
 document.addEventListener("keydown", e => { if (lb.style.display !== "flex") return; if (e.key === "ArrowLeft") show(cur - 1); else if (e.key === "ArrowRight") show(cur + 1); else if (e.key === "Escape") lb.style.display = "none"; });
 let tx = 0; lb.addEventListener("touchstart", e => tx = e.touches[0].clientX, {passive:true});
 lb.addEventListener("touchend", e => { const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 50) show(cur + (d < 0 ? 1 : -1)); });
+
+// Back to top + mobile Partner button
+const tt = $("totop"), cta = $("cta");
+const onScroll = () => { const y = window.scrollY; tt.classList.toggle("show", y > 700); cta.classList.toggle("show", y > 500 && $("contact").getBoundingClientRect().top > window.innerHeight); };
+window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+tt.onclick = e => { e.preventDefault(); window.scrollTo({top:0, behavior:"smooth"}); };
 
 // Scroll effects: fade-in, count-up, active nav link
 const count = el => { const t = +el.dataset.count, s = performance.now(); const f = n => { const k = Math.min((n - s) / 900, 1); el.textContent = Math.round(t * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); };
