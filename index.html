@@ -25,6 +25,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-ap
 nav{position:sticky;top:env(safe-area-inset-top,0px);background:rgba(10,15,26,.94);border-bottom:1px solid var(--line);z-index:5}
 nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
 nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:14px;padding:4px 0;border-bottom:2px solid transparent}
+nav .wrap>div{display:flex;overflow-x:auto;scrollbar-width:none}nav .wrap>div::-webkit-scrollbar{display:none}nav a{white-space:nowrap;flex:none}
 nav a:hover{color:var(--text)}nav a.on{color:var(--text);border-color:var(--hi)}
 nav b{font-family:var(--head);letter-spacing:.06em;text-transform:uppercase;font-size:18px}
 .hero{padding:64px 0 44px}
@@ -56,7 +57,8 @@ tr:last-child td{border-bottom:0}
 tr{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:6px 0}
 td{display:flex;justify-content:space-between;gap:16px;border:0;padding:6px 14px;white-space:normal}
 td::before{content:attr(data-label);color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-.stat.key{grid-column:span 2}nav a{margin-left:10px;font-size:13px}nav b{font-size:15px}}
+.stat.key{grid-column:span 2}nav a{margin-left:9px;font-size:12.5px}nav b{font-size:15px}}
+@media(max-width:480px){nav b{display:none}nav .wrap>div{width:100%;justify-content:space-between}nav a{margin-left:0}}
 .bars,.chart{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:12px}
 .chart svg{width:100%;height:auto;display:block}.chart small{color:var(--muted);font-size:12px}
 .bar{display:grid;grid-template-columns:34px 1fr 40px;gap:10px;align-items:center;font-size:13px;margin:4px 0}
@@ -94,18 +96,18 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px;border-top:1px soli
 </style>
 </head>
 <body>
-<nav><div class="wrap"><b id="navName"></b><div><a href="#results">Results</a><a href="#standings">Standings</a><a href="#gallery">Gallery</a><a href="#partners">Partners</a><a href="#contact">Contact</a></div></div></nav>
+<nav><div class="wrap"><b id="navName"></b><div><a href="#about">About</a><a href="#results">Results</a><a href="#standings">Standings</a><a href="#gallery">Gallery</a><a href="#partners">Partners</a><a href="#contact">Contact</a></div></div></nav>
 <header class="hero"><div class="wrap">
   <div class="num" id="num"></div><div class="lbl">Championship position</div>
   <h1 id="name"></h1><p class="tag" id="tagline"></p><div id="heroBtns"></div><div id="next"></div>
 </div></header>
 <main class="wrap">
   <section class="reveal"><h2 id="statsTitle">Season stats</h2><div class="stats" id="stats"></div></section>
+  <section id="about" class="reveal about" hidden><h2>About me</h2><div id="aboutText"></div></section>
   <section id="results" class="reveal"><h2>Round-by-round results</h2>
     <div class="scroll"><table><thead><tr><th>Round</th><th>Date</th><th>Venue</th><th>Quali</th><th>Heat</th><th>Final</th><th>Points</th><th>Highlights</th></tr></thead><tbody id="rows"></tbody></table></div>
     <p class="note">Heat and final shown as start → finish, with places gained or lost. Points: 25-20-16-14-12-10-8-6-4-2 for the final, plus 1 for pole.</p></section>
   <section id="standings" class="reveal"><h2>Championship standings</h2><div class="chart" id="chart"></div><div class="bars" id="bars"></div><p class="note" id="standNote"></p></section>
-  <section id="about" class="reveal about" hidden><h2>About me</h2><div id="aboutText"></div></section>
   <section id="videoSec" class="reveal" hidden><h2>Featured video</h2><div class="vid" id="vid"></div></section>
   <section id="gallery" class="reveal"><h2>Gallery</h2><div class="gallery" id="photos"></div><p class="note" id="credit"></p></section>
   <section id="partners" class="reveal"><h2>Partner with me</h2><p class="lbl">What I can offer today</p><div class="grid2" id="benefits"></div><p class="lbl">As support grows</p><div class="grid2 future" id="future"></div><p class="lbl">Sponsorship tiers</p><div class="grid3" id="tiers"></div><p class="note" style="margin:0 0 18px">Tiers are starting points, not fixed packages, and I’m happy to build a custom package. Contact me to discuss pricing and a package that suits your brand.</p><p class="lbl">Where the support goes</p><div class="grid2" id="invest"></div><p class="lbl">My audience</p><div class="grid2" id="audience"></div><p class="note" id="audNote"></p><div id="sponsors"></div><div id="kit"></div></section>
