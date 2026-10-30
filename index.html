@@ -115,7 +115,7 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px;border-top:1px soli
 </main>
 <div id="lb"><button id="lbp" aria-label="Previous">‹</button><img alt=""><button id="lbn" aria-label="Next">›</button><div id="lbc"></div></div>
 <a id="totop" href="#" aria-label="Back to top">↑</a>
-<div id="cta"><a class="btn" href="#contact">Partner with me</a></div>
+<div id="cta"><a class="btn" href="#partners">Partner with me</a></div>
 <footer><div class="wrap" id="foot"></div></footer>
 
 <script>
@@ -216,7 +216,7 @@ $("credit").textContent = SITE.photoCredit;
 if (SITE.hero) { const hd = document.querySelector(".hero"); hd.classList.add("img"); hd.style.setProperty("--hero", 'url("' + SITE.hero + '")'); }
 
 const ig = SITE.links.find(l => /instagram/i.test(l.label));
-$("heroBtns").innerHTML = '<a class="btn" href="#contact">Partner with me</a>' + (ig ? `<a class="btn alt" href="${esc(ig.url)}" target="_blank" rel="noopener">${icon("instagram")}Follow my season</a>` : "");
+$("heroBtns").innerHTML = '<a class="btn" href="#partners">Partner with me</a>' + (ig ? `<a class="btn alt" href="${esc(ig.url)}" target="_blank" rel="noopener">${icon("instagram")}Follow my season</a>` : "");
 
 const nx = SITE.rounds.find(r => !r.done);
 let when = ""; if (nx) { const dd = Math.ceil((new Date(nx.iso || nx.date) - new Date()) / 86400000); if (!isNaN(dd)) when = dd > 0 ? " · " + dd + " day" + (dd === 1 ? "" : "s") + " to go" : dd === 0 ? " · Race day" : ""; }
@@ -283,7 +283,7 @@ lb.addEventListener("touchend", e => { const d = e.changedTouches[0].clientX - t
 
 // Back to top + mobile Partner button
 const tt = $("totop"), cta = $("cta");
-const onScroll = () => { const y = window.scrollY; tt.classList.toggle("show", y > 700); cta.classList.toggle("show", y > 500 && $("contact").getBoundingClientRect().top > window.innerHeight); };
+const onScroll = () => { const y = window.scrollY; tt.classList.toggle("show", y > 700); cta.classList.toggle("show", y > 500 && $("partners").getBoundingClientRect().top > window.innerHeight); };
 window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
 tt.onclick = e => { e.preventDefault(); window.scrollTo({top:0, behavior:"smooth"}); };
 
