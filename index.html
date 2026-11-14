@@ -128,7 +128,7 @@ const SITE = {
   name: "Thavinka De Silva",
   championship: "Speedstar Championship 2026",
   className: "Senior",
-  tagline: "Speedstar 2026 Senior class racer, third in the championship after five rounds.",
+  tagline: "Speedstar 2026 Senior class racer, finished third in the championship after six rounds.",
   bio: "I’m seeking partners to support my racing. Get in touch to discuss how we can work together, or download my sponsorship proposal below.",
   email: "thavinka@gmail.com",
   photoCredit: "Photo credit: all photos courtesy of Speedbay.",
@@ -136,7 +136,7 @@ const SITE = {
 
   about: [
     "I’m Thavinka De Silva, a 20-year-old karting driver from Colombo. I race in the Senior category of the Speedstar series at Speedbay Circuit, Port City, one of the entry points into Sri Lanka’s competitive karting pathway.",
-    "I started karting in 2024, then took a break from racing in 2025 to focus on my studies. I returned for the 2026 season, and since then I’ve taken over two seconds off my best lap and climbed from 4th to 3rd in the standings, all with limited access to practice."
+    "I started karting in 2024, then took a break from racing in 2025 to focus on my studies. I returned for the 2026 season, and since then I’ve taken nearly two and a half seconds off my best lap and climbed from 4th to 3rd in the standings, all with limited access to practice."
   ],   // paragraphs about you. Empty = section hidden
   video: "",            // a YouTube link to feature, e.g. "https://www.youtube.com/watch?v=XXXX". Empty = hidden
   mediaKit: "sponsorship-proposal.pdf",   // your sponsorship proposal PDF. Empty = a “Request my sponsorship proposal” email button is shown
@@ -172,13 +172,13 @@ const SITE = {
     {round:"R3", date:"26 Jun 2026", venue:"Speedbay Portcity", done:true, quali:10, heatStart:10, heatFinish:7, finalStart:7, finalFinish:6, points:10},
     {round:"R4", date:"21 Aug 2026", venue:"Speedbay Portcity", done:true, quali:6, heatStart:6, heatFinish:5, finalStart:9, finalFinish:6, points:10},
     {round:"R5", date:"2 Oct 2026", venue:"Speedbay Portcity", done:true, quali:9, heatStart:9, heatFinish:6, finalStart:6, finalFinish:4, points:14},
-    {round:"R6", date:"13 Nov 2026", iso:"2026-11-13", venue:"Speedbay Portcity", done:false}   // for an upcoming round: iso = date as YYYY-MM-DD (for the countdown), tentative:true while the date is unconfirmed
+    {round:"R6", date:"13 Nov 2026", venue:"Speedbay Portcity", done:true, quali:7, heatStart:7, heatFinish:11, finalStart:11, finalFinish:4, points:14}   // for an upcoming round: iso = date as YYYY-MM-DD (for the countdown), tentative:true while the date is unconfirmed
   ],
   poleBonus: 1,
-  standings: [92,72,69,52,44,36,30,28,28,25,25,19,18,16,12,8,6,2],
+  standings: [108,93,83,77,46,36,36,36,28,25,25,22,19,16,12,12,10,8,6,2],
   me: 3,
   timeline: [
-    {year:"2026", title:"Speedstar Championship, Senior class", text:"Climbed from 4th to 3rd in the standings: P3 of 18 after five rounds, with a podium, a pole position and over two seconds taken off my best lap."},
+    {year:"2026", title:"Speedstar Championship, Senior class", text:"Climbed from 4th to 3rd in the standings and finished P3 of 20 after six rounds, with a podium, a pole position and nearly two and a half seconds taken off my best lap."},
     {year:"2025", title:"Break for studies", text:"Stepped back from racing to focus on my studies."},
     {year:"2024", title:"Started karting", text:"Began my karting journey."}
   ],
@@ -223,6 +223,7 @@ const nx = SITE.rounds.find(r => !r.done);
 let when = ""; if (nx) { const dd = Math.ceil((new Date(nx.iso || nx.date) - new Date()) / 86400000); if (!isNaN(dd)) when = dd > 0 ? " · " + dd + " day" + (dd === 1 ? "" : "s") + " to go" : dd === 0 ? " · Race day" : ""; }
 if (nx) $("next").innerHTML = `<div class="next"><div><span>Next race</span><b>${esc(nx.round)} · ${esc(nx.date)}${nx.tentative ? " (tentative)" : ""}</b><span>${esc(nx.venue)}${when}</span></div><div><b>${lead - mine} pts</b><span>behind the championship leader</span></div></div>`;
 
+if (!nx) $("next").innerHTML = `<div class="next"><div><span>${esc(SITE.championship)} complete</span><b>Finished P${SITE.me} of ${SITE.standings.length}</b><span>Now seeking partners for 2027</span></div><div><b>${mine} pts</b><span>final championship points</span></div></div>`;
 const gain = sum(done.map(r => (r.heatStart - r.heatFinish) + (r.finalStart - r.finalFinish)));
 const stats = [
   ["Championship", "P" + SITE.me + " of " + SITE.standings.length], ["Points", mine], ["Podiums", done.filter(r => r.finalFinish <= 3).length],
@@ -252,7 +253,7 @@ $("chart").innerHTML = `<small>My points after each round</small><svg viewBox="0
 
 const max = Math.max(...SITE.standings);
 $("bars").innerHTML = SITE.standings.map((p, i) => `<div class="bar ${i + 1 === SITE.me ? "me" : ""}"><span>P${i + 1}</span><i style="width:${(p / max * 100).toFixed(1)}%"></i><span>${p}</span></div>`).join("");
-$("standNote").textContent = "Gap to the leader: " + (lead - mine) + " points, with " + (SITE.totalRounds - done.length) + " round(s) remaining.";
+$("standNote").textContent = SITE.totalRounds - done.length > 0 ? "Gap to the leader: " + (lead - mine) + " points, with " + (SITE.totalRounds - done.length) + " round(s) remaining." : "Final standings: " + (lead - mine) + " points behind the champion. Two drivers joined for the final round.";
 
 if (SITE.about.length) { $("about").hidden = false; $("aboutText").innerHTML = SITE.about.map(p => `<p>${esc(p)}</p>`).join("") + '<div class="tl" style="margin-top:20px">' + SITE.timeline.map(t => `<div><b>${esc(t.year)} · ${esc(t.title)}</b><span>${esc(t.text)}</span></div>`).join("") + "</div>"; }
 const vid = (SITE.video.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/) || [])[1];
