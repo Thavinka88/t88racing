@@ -31,9 +31,9 @@ nav b{font-family:var(--head);letter-spacing:.06em;text-transform:uppercase;font
 .hero{padding:64px 0 44px}
 .hero.img{padding:96px 0 64px;background:linear-gradient(90deg,rgba(5,9,18,.88),rgba(5,9,18,.35)),var(--hero) 70% 35%/cover}
 @media(max-width:640px){.hero.img{padding:0 0 40px;background:none}.hero.img::before{content:"";display:block;height:300px;background:linear-gradient(180deg,rgba(10,15,26,0) 55%,var(--bg)),var(--hero) 78% 30%/cover}.hero.img .wrap{position:relative;margin-top:-24px}}
-.num{font-family:var(--head);font-size:clamp(90px,24vw,210px);font-weight:800;line-height:.82;color:var(--hi);font-style:italic}
+.num{font-family:var(--head);font-size:120px;font-size:clamp(90px,24vw,210px);font-weight:800;line-height:.82;color:var(--hi);font-style:italic}
 .lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:6px 0 14px}
-h1{font-family:var(--head);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(38px,7vw,68px);margin:0 0 8px;line-height:1}
+h1{font-family:var(--head);font-style:italic;font-weight:800;text-transform:uppercase;font-size:48px;font-size:clamp(38px,7vw,68px);margin:0 0 8px;line-height:1}
 .tag{color:#d4dbe8;max-width:580px;font-size:18px;margin:0 0 22px}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:600;margin:0 10px 10px 0;border:1px solid var(--accent)}
 .btn.alt{background:transparent;color:var(--text);border-color:var(--line)}.btn:hover{filter:brightness(1.15)}
@@ -73,17 +73,17 @@ td::before{content:attr(data-label);color:var(--muted);font-size:12px;text-trans
 .about p{max-width:680px;margin:0 0 12px}
 .vid{aspect-ratio:16/9;max-width:760px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}.vid iframe{width:100%;height:100%;border:0}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.ph{aspect-ratio:4/3;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1a2438,#0b2a6b);display:flex;align-items:flex-end;margin:0;cursor:zoom-in}
-.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}.ph:hover img{transform:scale(1.04)}
+.ph{min-height:180px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1a2438,#0b2a6b);display:flex;align-items:flex-end;margin:0;cursor:zoom-in}
+.ph img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}.ph:hover img{transform:scale(1.04)}
 .ph span{position:relative;color:#fff;font-size:13px;padding:10px 12px;width:100%;background:linear-gradient(transparent,rgba(0,0,0,.75))}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.chip{font:inherit;text-align:left;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;line-height:1.3}.chip small{display:block;color:var(--muted);font-size:12px}.chip.on{background:var(--accent);border-color:var(--accent)}.chip.on small{color:#dbe6ff}
 @media(max-width:640px){.chips{display:grid;grid-template-columns:1fr 1fr}.chip{padding:8px 10px;font-size:14px}.chip small{font-size:11.5px}}
-.quote{margin:0;border-left:4px solid var(--hi);padding:6px 0 6px 22px;max-width:780px}.quote p{font-family:var(--head);font-style:italic;font-weight:700;font-size:clamp(24px,4vw,34px);line-height:1.2;margin:0 0 10px}.quote cite{color:var(--muted);font-style:normal;font-size:14px}
+.quote{margin:0;border-left:4px solid var(--hi);padding:6px 0 6px 22px;max-width:780px}.quote p{font-family:var(--head);font-style:italic;font-weight:700;font-size:28px;font-size:clamp(24px,4vw,34px);line-height:1.2;margin:0 0 10px}.quote cite{color:var(--muted);font-style:normal;font-size:14px}
 h3.sub{font-family:var(--head);font-style:italic;font-size:18px;letter-spacing:.06em;text-transform:uppercase;margin:32px 0 12px}
 .alb span{line-height:1.35}.alb span b{font-family:var(--head);font-style:italic;font-size:18px}
 .albbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}.albbar b{font-family:var(--head);font-style:italic;font-size:22px}
 .albbar button{font:inherit;font-size:14px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
-#lb{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
+#lb{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
 #lb img{max-width:100%;max-height:82%;border-radius:6px}#lbc{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#ddd;font-size:14px}
 #lb button{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:0;width:44px;height:44px;border-radius:50%;font-size:22px;cursor:pointer}
 #lbp{left:12px}#lbn{right:12px}
@@ -387,7 +387,7 @@ const SITE = {
 /* ============================ END OF EDITABLE DATA ============================ */
 
 const $ = id => document.getElementById(id);
-const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const sum = a => a.reduce((x, y) => x + y, 0);
 const done = SITE.rounds.filter(r => r.done);
 const pf = r => r.points + (r.pole ? SITE.poleBonus : 0);
