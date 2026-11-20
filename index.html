@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Thavinka De Silva – Racing Portfolio</title>
+<title>Thavinka De Silva | T88 Racing</title>
 <meta name="description" content="Thavinka De Silva – Speedstar Championship 2026 Senior class racer. Results, standings, photos and partnership details.">
-<meta property="og:title" content="Thavinka De Silva – Racing Portfolio">
+<meta property="og:title" content="Thavinka De Silva | T88 Racing">
 <meta property="og:description" content="Speedstar Championship 2026, P3 in the standings. Results, photos and partnership details.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -64,6 +64,9 @@ td::before{content:attr(data-label);color:var(--muted);font-size:12px;text-trans
 .chart svg{width:100%;height:auto;display:block}.chart small{color:var(--muted);font-size:12px}
 .bar{display:grid;grid-template-columns:34px 1fr 40px;gap:10px;align-items:center;font-size:13px;margin:4px 0}
 .bar i{display:block;height:12px;border-radius:3px;background:var(--bar)}
+.bars:not(.all) .bar.extra{display:none}
+.more{font:inherit;font-size:14px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 16px;cursor:pointer;margin:2px 0 12px}
+.recap{font-size:18px;line-height:1.55;max-width:760px;margin:0 0 20px;color:#d4dbe8}
 .bar.me i{background:var(--accent);outline:2px solid #fff}.bar.me{font-weight:700}
 .note{color:var(--muted);font-size:13px;margin:10px 0 0}
 .tl{border-left:2px solid var(--line);margin-left:6px}
@@ -113,14 +116,14 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px;border-top:1px soli
   <section class="reveal"><h2 id="statsTitle">Season stats</h2><div class="stats" id="stats"></div></section>
   <section id="about" class="reveal about" hidden><h2>About me</h2><div id="aboutText"></div></section>
   <section id="quote" class="reveal" hidden><blockquote class="quote"><p id="quoteText"></p><cite id="quoteBy"></cite></blockquote></section>
-  <section id="results" class="reveal"><h2>Round-by-round results</h2>
+  <section id="results" class="reveal"><h2>Round-by-round results</h2><p class="recap" id="recap"></p>
     <div class="scroll"><table><thead><tr><th>Round</th><th>Date</th><th>Venue</th><th>Quali</th><th>Heat</th><th>Final</th><th>Points</th><th>Highlights</th></tr></thead><tbody id="rows"></tbody></table></div>
     <p class="note">Heat and final shown as start → finish, with places gained or lost. Points: 25-20-16-14-12-10-8-6-4-2 for the final, plus 1 for pole.</p></section>
-  <section id="standings" class="reveal"><h2>Championship standings</h2><div class="chart" id="chart"></div><div class="bars" id="bars"></div><p class="note" id="standNote"></p></section>
+  <section id="standings" class="reveal"><h2>Championship standings</h2><div class="chart" id="chart"></div><div class="bars" id="bars"></div><button class="more" id="barsBtn" type="button"></button><p class="note" id="standNote"></p></section>
   <section id="videoSec" class="reveal" hidden><h2>Featured video</h2><div class="vid" id="vid"></div></section>
   <section id="gallery" class="reveal"><h2>Gallery</h2><div class="gallery" id="albums"></div><div id="albView" hidden></div></section>
   <section id="partners" class="reveal"><h2>Partner with me for 2027</h2><p class="lbl">What I can offer today</p><div class="grid2" id="benefits"></div><p class="lbl">As support grows</p><div class="grid2 future" id="future"></div><p class="lbl">Sponsorship tiers</p><div class="grid3" id="tiers"></div><p class="note" style="margin:0 0 18px">Tiers are starting points, not fixed packages, and I’m happy to build a custom package. Contact me to discuss pricing and a package that suits your brand.</p><p class="lbl">Where the support goes</p><div class="grid2" id="invest"></div><p class="lbl">My audience</p><div class="grid2" id="audience"></div><p class="note" id="audNote"></p><div id="sponsors"></div><div id="kit"></div></section>
-  <section id="contact" class="reveal"><h2>Get in touch</h2><p id="bio"></p><div id="links"></div></section>
+  <section id="contact" class="reveal"><h2>Get in touch</h2><p id="bio"></p><div id="links"></div><p class="note" id="contactNote"></p></section>
 </main>
 <div id="lb"><button id="lbp" aria-label="Previous">‹</button><img alt=""><button id="lbn" aria-label="Next">›</button><div id="lbc"></div></div>
 <a id="totop" href="#" aria-label="Back to top">↑</a>
@@ -139,6 +142,8 @@ const SITE = {
   tagline: "Speedstar 2026 Senior class racer, finished third in the championship after six rounds.",
   bio: "I’m seeking partners to support my racing. Get in touch to discuss how we can work together, or download my sponsorship proposal below.",
   email: "thavinka@gmail.com",
+  recap: "My 2026 Speedstar Senior season began with pole position and a heat win in Round 1. The breakthrough came in Round 2, when I climbed from P8 on the grid to finish second, and I went on to finish in the top six in every final. I ended the season P3 of 20 with 83 points, and in the final round I charged from P11 to P4 and set a personal-best lap of 39.799.",
+  contactNote: "Email me and I’ll reply within a few days with my full proposal and availability.",
   photoCredit: "Photo credit: all photos courtesy of Speedbay.",
   links: [{label:"Instagram", url:"https://www.instagram.com/t88_racing/"}, {label:"YouTube", url:"https://www.youtube.com/@Thavinka88"}, {label:"Linktree", url:"https://linktr.ee/thavinka88"}],
 
@@ -399,10 +404,12 @@ const ICON = {
 };
 const icon = l => ICON[l.toLowerCase()] || ICON.link;
 
-document.title = SITE.name + " – Racing Portfolio";
+document.title = SITE.name + " | T88 Racing";
 $("navName").textContent = SITE.name; $("name").textContent = SITE.name;
 $("num").textContent = "P" + SITE.me; $("tagline").textContent = SITE.tagline;
 $("bio").textContent = SITE.bio;
+if (SITE.recap) $("recap").textContent = SITE.recap; else $("recap").hidden = true;
+$("contactNote").textContent = SITE.contactNote || "";
 if (SITE.quote && SITE.quote.text) { $("quote").hidden = false; $("quoteText").textContent = "“" + SITE.quote.text + "”"; $("quoteBy").textContent = "— " + SITE.quote.name + (SITE.quote.role ? ", " + SITE.quote.role : ""); } $("statsTitle").textContent = SITE.championship + " · " + SITE.className;
 const last = done[done.length - 1];
 $("foot").textContent = "© " + new Date().getFullYear() + " " + SITE.name + (last ? " · Updated after " + last.round + " (" + last.date + ")" : "");
@@ -420,9 +427,9 @@ const gain = sum(done.map(r => (r.heatStart - r.heatFinish) + (r.finalStart - r.
 const fg = sum(done.map(r => r.finalStart - r.finalFinish)) / done.length;
 const stats = [
   ["Championship", "P" + SITE.me + " of " + SITE.standings.length], ["Points", mine], ["Best lap (was " + SITE.firstLap + ")", SITE.bestLap], ["Podiums", done.filter(r => r.finalFinish <= 3).length],
-  ["Rounds", done.length + " / " + SITE.totalRounds], ["Best finish", "P" + Math.min(...done.map(r => r.finalFinish))],
+  ["Best finish", "P" + Math.min(...done.map(r => r.finalFinish))],
   ["Avg finish", (sum(done.map(r => r.finalFinish)) / done.length).toFixed(1)], ["Poles", done.filter(r => r.quali === 1).length],
-  ["Heat wins", done.filter(r => r.heatFinish === 1).length], ["Places gained per final", (fg > 0 ? "+" : "") + fg.toFixed(1)]
+  ["Places gained per final", (fg > 0 ? "+" : "") + fg.toFixed(1)]
 ];
 $("stats").innerHTML = stats.map(([l, v], i) => `<div class="stat${i < 3 ? " key" : ""}"><b${typeof v === "number" ? ` data-count="${v}"` : ""}>${esc(v)}</b><span>${l}</span></div>`).join("");
 
@@ -445,7 +452,12 @@ $("chart").innerHTML = `<small>My points after each round</small><svg viewBox="0
   ${cum.map((v, i) => `<circle cx="${X(i)}" cy="${Y(v)}" r="5" fill="var(--bg)" stroke="var(--hi)" stroke-width="3"/><text x="${X(i)}" y="${Y(v) - 12}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">${v}</text><text x="${X(i)}" y="${H - 10}" text-anchor="middle" font-size="12" fill="var(--muted)">${esc(done[i].round)}</text>`).join("")}</svg>`;
 
 const max = Math.max(...SITE.standings);
-$("bars").innerHTML = SITE.standings.map((p, i) => `<div class="bar ${i + 1 === SITE.me ? "me" : ""}"><span>P${i + 1}</span><i style="width:${(p / max * 100).toFixed(1)}%"></i><span>${p}</span></div>`).join("");
+$("bars").innerHTML = SITE.standings.map((p, i) => `<div class="bar${i + 1 === SITE.me ? " me" : ""}${i >= 5 && i + 1 !== SITE.me ? " extra" : ""}"><span>P${i + 1}</span><i style="width:${(p / max * 100).toFixed(1)}%"></i><span>${p}</span></div>`).join("");
+if (SITE.standings.length <= 5) $("barsBtn").hidden = true;
+else {
+  const setBars = all => { $("bars").classList.toggle("all", all); $("barsBtn").textContent = all ? "Show top 5" : "Show all " + SITE.standings.length + " drivers"; };
+  setBars(false); $("barsBtn").onclick = () => setBars(!$("bars").classList.contains("all"));
+}
 $("standNote").textContent = SITE.totalRounds - done.length > 0 ? "Gap to the leader: " + (lead - mine) + " points, with " + (SITE.totalRounds - done.length) + " round(s) remaining." : "Final standings: " + (lead - mine) + " points behind the champion. Two drivers joined for the final round.";
 
 if (SITE.about.length) { $("about").hidden = false; $("aboutText").innerHTML = SITE.about.map(p => `<p>${esc(p)}</p>`).join("") + '<div class="tl" style="margin-top:20px">' + SITE.timeline.map(t => `<div><b>${esc(t.year)} · ${esc(t.title)}</b><span>${esc(t.text)}</span></div>`).join("") + "</div>"; }
